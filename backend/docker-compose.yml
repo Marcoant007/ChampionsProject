@@ -1,0 +1,32 @@
+version: '3.7'
+services:
+  database: 
+    image: champions
+    container_name: championstimedb
+    restart: always
+    ports: 
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=champions
+      - POSTGRES_PASSWORD=champions
+      - POSTGRES_DB=championsdb
+    volumes:
+      - pgdata:/data/postgres
+
+  app:
+    build: .
+    container_name: backend_champions
+    restart: always
+    ports: 
+      - 3333:3333
+      - 9229:9229 
+    volumes: 
+      - .:/usr/app
+    links: 
+      - database
+    depends_on:
+      - database
+
+volumes:
+  pgdata:
+    driver: local
