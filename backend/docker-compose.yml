@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   database: 
-    image: champions
+    image: postgres
     container_name: championstimedb
     restart: always
     ports: 
